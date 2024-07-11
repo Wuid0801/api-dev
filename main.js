@@ -2,7 +2,6 @@ const API_KEY = "391ef86b614f41ef954d2891f97dcc27"
 let newsList = [];
 const getLatestNews = async (category = '', keyword = '') => {
   const url = new URL(`https://monumental-eclair-c31282.netlify.app/top-headlines`);
-
   if (category) {
     url.searchParams.append('category', category);
   }
