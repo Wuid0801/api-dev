@@ -57,7 +57,12 @@ const categoryBtns = document.querySelectorAll('.category-btn');
 categoryBtns.forEach(btn => {
   btn.addEventListener('click', function (event) {
     event.preventDefault(); // 기본 동작 방지
-    const category = this.getAttribute('data-category'); // 클릭된 버튼의 카테고리 가져오기
-    getLatestNews(category); // 해당 카테고리의 뉴스 가져오기
+    const category = this.getAttribute('data-category'); 
+    getLatestNews(category); 
   });
 });
+
+function toggleSidebar() {
+  var sidebar = document.querySelector('.sidenav');
+  sidebar.classList.toggle('selected');
+}

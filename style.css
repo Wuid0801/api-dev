@@ -45,19 +45,27 @@
   margin: 0.25rem;
 }
 
-@media (max-width: 768px) {
-  .menus {
-    display: none;
+@media (max-width: 853px) {
+  .sidenav {
+    position: fixed;
+    width: 200px;
+    height: 100%;
+    margin-top: 0;
+    top: -7px;
+    left: -7px;
+    transition: background-color 0.3s ease;
   }
 
-  .navbar-nav {
-    flex-direction: column;
+  .show {
+    background-color: #ccc;
   }
-
   .navbar-toggler {
-    order: -1;
+    position: absolute;
+    top: 10px;
+    left: 10px;
   }
 }
+
 .search-container {
   display: flex;
 }
