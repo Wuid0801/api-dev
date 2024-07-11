@@ -68,6 +68,10 @@
 
 .search-container {
   display: flex;
+  justify-content: space-between;
+}
+.search-container-flex{
+  display: flex;
 }
 .search-icon {
   cursor: pointer;
@@ -77,6 +81,9 @@
 .search-box .form-control {
   flex: 1;
   margin-right: 10px;
+}
+.search-box-flex{
+  display: flex;
 }
 .search-box {
   display: none;

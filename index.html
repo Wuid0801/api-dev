@@ -16,22 +16,40 @@
   <body>
     <section class="container">
       <div class="search-container">
-        <svg
-          class="search-icon"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M10.5 3a7.5 7.5 0 015.864 12.028l5.236 5.236-1.414 1.414-5.236-5.236A7.5 7.5 0 1110.5 3zm0 2a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"
-            fill="#000"
-          />
-        </svg>
-        <div class="search-box">
-          <input type="text" class="form-control" placeholder="검색어를 입력하세요" aria-label="검색어를 입력하세요" aria-describedby="basic-addon2"/>
-          <button class="btn btn-outline-secondary" type="button" id="button-addon2">Go</button>
+        <div></div>
+        <div class="search-container-flex">
+          <div class="search-box">
+            <div class="search-box-flex">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="검색어를 입력하세요"
+                aria-label="검색어를 입력하세요"
+                aria-describedby="basic-addon2"
+                id="search-input"
+              />
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                id="search-button"
+              >
+                Go
+              </button>
+            </div>
+          </div>
+          <svg
+            class="search-icon"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M10.5 3a7.5 7.5 0 015.864 12.028l5.236 5.236-1.414 1.414-5.236-5.236A7.5 7.5 0 1110.5 3zm0 2a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"
+              fill="#000"
+            />
+          </svg>
         </div>
       </div>
       <section>
@@ -58,49 +76,118 @@
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav menus">
                 <li class="nav-item">
-                  <a class="nav-link category-btn" href="#" data-category="sport">Sport</a>
+                  <a
+                    class="nav-link category-btn"
+                    href="#"
+                    data-category="sport"
+                    >Sport</a
+                  >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link category-btn" href="#" data-category="tech">Tech</a>
+                  <a class="nav-link category-btn" href="#" data-category="tech"
+                    >Tech</a
+                  >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link category-btn" href="#" data-category="world">World</a>
+                  <a
+                    class="nav-link category-btn"
+                    href="#"
+                    data-category="world"
+                    >World</a
+                  >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link category-btn" href="#" data-category="finance">Finance</a>
+                  <a
+                    class="nav-link category-btn"
+                    href="#"
+                    data-category="finance"
+                    >Finance</a
+                  >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link category-btn" href="#" data-category="politics">Politics</a>
+                  <a
+                    class="nav-link category-btn"
+                    href="#"
+                    data-category="politics"
+                    >Politics</a
+                  >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link category-btn" href="#" data-category="business">Business</a>
+                  <a
+                    class="nav-link category-btn"
+                    href="#"
+                    data-category="business"
+                    >Business</a
+                  >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link category-btn" href="#" data-category="economics">Economics</a>
+                  <a
+                    class="nav-link category-btn"
+                    href="#"
+                    data-category="economics"
+                    >Economics</a
+                  >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link category-btn" href="#" data-category="entertainment">Entertainment</a>
+                  <a
+                    class="nav-link category-btn"
+                    href="#"
+                    data-category="entertainment"
+                    >Entertainment</a
+                  >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link category-btn" href="#" data-category="beauty">Beauty</a>
+                  <a
+                    class="nav-link category-btn"
+                    href="#"
+                    data-category="beauty"
+                    >Beauty</a
+                  >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link category-btn" href="#" data-category="travel">Travel</a>
+                  <a
+                    class="nav-link category-btn"
+                    href="#"
+                    data-category="travel"
+                    >Travel</a
+                  >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link category-btn" href="#" data-category="music">Music</a>
+                  <a
+                    class="nav-link category-btn"
+                    href="#"
+                    data-category="music"
+                    >Music</a
+                  >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link category-btn" href="#" data-category="food">Food</a>
+                  <a class="nav-link category-btn" href="#" data-category="food"
+                    >Food</a
+                  >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link category-btn" href="#" data-category="science">Science</a>
+                  <a
+                    class="nav-link category-btn"
+                    href="#"
+                    data-category="science"
+                    >Science</a
+                  >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link category-btn" href="#" data-category="gaming">Gaming</a>
+                  <a
+                    class="nav-link category-btn"
+                    href="#"
+                    data-category="gaming"
+                    >Gaming</a
+                  >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link category-btn" href="#" data-category="energy">Energy</a>
+                  <a
+                    class="nav-link category-btn"
+                    href="#"
+                    data-category="energy"
+                    >Energy</a
+                  >
                 </li>
               </ul>
             </div>

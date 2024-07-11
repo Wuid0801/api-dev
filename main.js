@@ -1,19 +1,31 @@
 const API_KEY = "391ef86b614f41ef954d2891f97dcc27"
 let newsList = [];
-const getLatestNews = async (category = '') => {
-
+const getLatestNews = async (category = '', keyword = '') => {
   const url = new URL(`https://monumental-eclair-c31282.netlify.app/top-headlines`);
-  url.searchParams.append('category', category);
-  const response = await fetch(url).then(response => response.json())
-    .then(data => {
-      console.log(data.articles);
-      newsList = data.articles;
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-  render();
-}
+
+  if (category) {
+    url.searchParams.append('category', category);
+  }
+  if (keyword) {
+    url.searchParams.append('keyword', keyword);
+  }
+
+  console.log('Request URL:', url.toString());
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error('네트워크 응답이 올바르지 않습니다.');
+    }
+    const data = await response.json();
+    console.log('Received data:', data.articles);
+    newsList = data.articles;
+    render();
+  } catch (error) {
+    console.error('데이터를 못 받아왔습니다', error);
+  }
+};
+
 
 const render = () => {
   const maxLength = 200;
@@ -66,3 +78,18 @@ function toggleSidebar() {
   var sidebar = document.querySelector('.sidenav');
   sidebar.classList.toggle('selected');
 }
+
+const search = () => {
+  const keyword = document.getElementById('search-input').value.trim();
+  if (keyword) {
+    getLatestNews('', keyword);
+  }
+}
+
+document.getElementById('search-button').addEventListener('click', search);
+
+document.getElementById('search-input').addEventListener('keyup', function (event) {
+  if (event.key === 'Enter') {
+    search();
+  }
+});
