@@ -5,7 +5,9 @@ let errorMessage = '데이터가 없습니다';
 let totalResults = 0;
 let page = 1;
 let pageSize = 10;
-let groupSize = 20;
+let groupSize = 5;
+let category = ''; // 전역 변수로 선언
+let keyword = ''; // 전역 변수로 선언
 
 const buildURL = (category = '', keyword = '', page = '', pageSize = '') => {
   const url = new URL(`https://monumental-eclair-c31282.netlify.app/top-headlines?country=kr`);
@@ -24,7 +26,7 @@ const buildURL = (category = '', keyword = '', page = '', pageSize = '') => {
   return url.toString();
 };
 
-const getLatestNews = async (category = '', keyword = '', page = '', pageSize = '') => {
+const getLatestNews = async () => {
   const url = buildURL(category, keyword, page, pageSize);
   console.log('Request URL:', url);
 
@@ -118,8 +120,10 @@ const categoryBtns = document.querySelectorAll('.category-btn');
 categoryBtns.forEach(btn => {
   btn.addEventListener('click', function (event) {
     event.preventDefault(); // 기본 동작 방지
-    const category = this.getAttribute('data-category');
-    getLatestNews(category);
+    category = this.getAttribute('data-category'); // 전역 변수에 할당
+    keyword = ''; // 카테고리 버튼을 누르면 keyword 초기화
+    page = 1; // 페이지 초기화
+    getLatestNews();
   });
 });
 
@@ -129,9 +133,11 @@ function toggleSidebar() {
 }
 
 const search = () => {
-  const keyword = document.getElementById('search-input').value.trim();
+  keyword = document.getElementById('search-input').value.trim(); // 전역 변수에 할당
   if (keyword) {
-    getLatestNews('', keyword);
+    category = ''; // 검색을 하면 category 초기화
+    page = 1; // 페이지 초기화
+    getLatestNews();
   }
 };
 
@@ -150,7 +156,7 @@ const paginationRender = () => {
   const pageGroup = Math.ceil(page / groupSize);
   const lastPage = Math.min(pageGroup * groupSize, totalPage);
   const firstPage = Math.max(lastPage - (groupSize - 1), 1);
-
+  const displayPages = (totalPage <= 5) ? 3 : 5;
   let paginationHTML = '';
   if (page > 1) {
     paginationHTML += `<li class="page-item" onClick="moveToPage(1)"><a class="page-link" aria-label="First">&laquo;</a></li>`;
@@ -170,7 +176,7 @@ const paginationRender = () => {
 
 const moveToPage = (pageNum) => {
   page = pageNum;
-  getLatestNews('', '', page, pageSize);
+  getLatestNews();
 };
 
 //   <nav aria-label="Page navigation example">
