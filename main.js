@@ -1,7 +1,13 @@
-const API_KEY = "391ef86b614f41ef954d2891f97dcc27"
+const API_KEY = "391ef86b614f41ef954d2891f97dcc27";
 let newsList = [];
 let errorMessage = '데이터가 없습니다';
-const buildURL = (category = '', keyword = '') => {
+
+let totalResults = 0;
+let page = 1;
+let pageSize = 10;
+let groupSize = 20;
+
+const buildURL = (category = '', keyword = '', page = '', pageSize = '') => {
   const url = new URL(`https://monumental-eclair-c31282.netlify.app/top-headlines?country=kr`);
   if (category) {
     url.searchParams.append('category', category);
@@ -9,11 +15,17 @@ const buildURL = (category = '', keyword = '') => {
   if (keyword) {
     url.searchParams.append('q', keyword);
   }
+  if (page) {
+    url.searchParams.set("page", page);
+  }
+  if (pageSize) {
+    url.searchParams.set("pageSize", pageSize);
+  }
   return url.toString();
 };
 
-const getLatestNews = async (category = '', keyword = '') => {
-  const url = buildURL(category, keyword);
+const getLatestNews = async (category = '', keyword = '', page = '', pageSize = '') => {
+  const url = buildURL(category, keyword, page, pageSize);
   console.log('Request URL:', url);
 
   try {
@@ -22,12 +34,14 @@ const getLatestNews = async (category = '', keyword = '') => {
       throw new Error('네트워크 응답이 올바르지 않습니다.');
     }
     const data = await response.json();
-    console.log('Received data:', data.articles);
+    console.log('Received data:', data);
     newsList = data.articles;
+    totalResults = data.totalResults;
     render();
+    paginationRender();
   } catch (error) {
     if (error.response) {
-      console.log(error)
+      console.log(error);
       errorMessage = '에러가 발생했습니다';
       switch (error.response.status) {
         case 400:
@@ -119,7 +133,7 @@ const search = () => {
   if (keyword) {
     getLatestNews('', keyword);
   }
-}
+};
 
 document.getElementById('search-button').addEventListener('click', search);
 
@@ -128,3 +142,51 @@ document.getElementById('search-input').addEventListener('keyup', function (even
     search();
   }
 });
+
+// Pagination
+const paginationRender = () => {
+//totalResult, page, pageSize, groupSize, pageGroup, lastPage, totalPage, firstPage
+  const totalPage = Math.ceil(totalResults / pageSize);
+  const pageGroup = Math.ceil(page / groupSize);
+  const lastPage = Math.min(pageGroup * groupSize, totalPage);
+  const firstPage = Math.max(lastPage - (groupSize - 1), 1);
+
+  let paginationHTML = '';
+  if (page > 1) {
+    paginationHTML += `<li class="page-item" onClick="moveToPage(1)"><a class="page-link" aria-label="First">&laquo;</a></li>`;
+    paginationHTML += `<li class="page-item" onClick="moveToPage(${page - 1})"><a class="page-link" aria-label="Previous">&lt;</a></li>`;
+  }
+
+  for (let i = firstPage; i <= lastPage; i++) {
+    paginationHTML += `<li class="page-item ${i === page ? 'active' : ''}" onClick="moveToPage(${i})"><a class="page-link">${i}</a></li>`;
+  }
+
+  if (page < totalPage) {
+    paginationHTML += `<li class="page-item" onClick="moveToPage(${page + 1})"><a class="page-link" aria-label="Next">&gt;</a></li>`;
+    paginationHTML += `<li class="page-item" onClick="moveToPage(${totalPage})"><a class="page-link" aria-label="Last">&raquo;</a></li>`;
+  }
+  document.querySelector(".pagination").innerHTML = paginationHTML;
+};
+
+const moveToPage = (pageNum) => {
+  page = pageNum;
+  getLatestNews('', '', page, pageSize);
+};
+
+//   <nav aria-label="Page navigation example">
+  //   <ul class="pagination">
+  //     <li class="page-item">
+  //       <a class="page-link" href="#" aria-label="Previous">
+  //         <span aria-hidden="true">&laquo;</span>
+  //       </a>
+  //     </li>
+  //     <li class="page-item"><a class="page-link" href="#">1</a></li>
+  //     <li class="page-item"><a class="page-link" href="#">2</a></li>
+  //     <li class="page-item"><a class="page-link" href="#">3</a></li>
+  //     <li class="page-item">
+  //       <a class="page-link" href="#" aria-label="Next">
+  //         <span aria-hidden="true">&raquo;</span>
+  //       </a>
+  //     </li>
+  //   </ul>
+  // </nav>

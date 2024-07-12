@@ -97,3 +97,9 @@
   display: flex;
   justify-content: center;
 }
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+}
