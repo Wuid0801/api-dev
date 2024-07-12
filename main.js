@@ -2,7 +2,7 @@ const API_KEY = "391ef86b614f41ef954d2891f97dcc27"
 let newsList = [];
 let errorMessage = '데이터가 없습니다';
 const buildURL = (category = '', keyword = '') => {
-  const url = new URL(`https://study-website-be-bbb1539aa813.herokuapp.com/top-headlines`);
+  const url = new URL(`https://monumental-eclair-c31282.netlify.app/top-headlines?country=kr`);
   if (category) {
     url.searchParams.append('category', category);
   }

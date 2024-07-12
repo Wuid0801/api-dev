@@ -70,7 +70,7 @@
   display: flex;
   justify-content: space-between;
 }
-.search-container-flex{
+.search-container-flex {
   display: flex;
 }
 .search-icon {
@@ -82,7 +82,7 @@
   flex: 1;
   margin-right: 10px;
 }
-.search-box-flex{
+.search-box-flex {
   display: flex;
 }
 .search-box {
@@ -91,4 +91,9 @@
 
 .search-box.visible {
   display: block;
+}
+
+.navbar-collapse{
+  display: flex;
+  justify-content: center;
 }
