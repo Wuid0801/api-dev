@@ -198,7 +198,7 @@ const moveToPage = (pageNum) => {
   // </nav>
 
   const Api_Key = 'KMGHDGTtYyp8ZQ6PslEt0FGSzsPPNayDVL8SfwGe9yZtqZFk5BMQ9U8763MgRzvc5QykfH9fxyf1ZovtRuDkyQ%3D%3D';
-const url = new URL(`http://apis.data.go.kr/1400000/service/cultureInfoService2/mntInfoOpenAPI`);
+const url = new URL(`https://apis.data.go.kr/1400000/service/cultureInfoService2/mntInfoOpenAPI`);
 
 const getLatestNews2 = async () => {
     url.searchParams.append('ServiceKey', Api_Key);
