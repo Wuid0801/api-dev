@@ -6,8 +6,8 @@ let totalResults = 0;
 let page = 1;
 let pageSize = 10;
 let groupSize = 5;
-let category = ''; // 전역 변수로 선언
-let keyword = ''; // 전역 변수로 선언
+let category = ''; 
+let keyword = ''; 
 
 const buildURL = (category = '', keyword = '', page = '', pageSize = '') => {
   const url = new URL(`https://monumental-eclair-c31282.netlify.app/top-headlines?country=kr`);
@@ -122,7 +122,7 @@ categoryBtns.forEach(btn => {
     event.preventDefault(); // 기본 동작 방지
     category = this.getAttribute('data-category'); // 전역 변수에 할당
     keyword = ''; // 카테고리 버튼을 누르면 keyword 초기화
-    page = 1; // 페이지 초기화
+    page = 1; 
     getLatestNews();
   });
 });
@@ -136,7 +136,7 @@ const search = () => {
   keyword = document.getElementById('search-input').value.trim(); // 전역 변수에 할당
   if (keyword) {
     category = ''; // 검색을 하면 category 초기화
-    page = 1; // 페이지 초기화
+    page = 1; 
     getLatestNews();
   }
 };
@@ -196,3 +196,31 @@ const moveToPage = (pageNum) => {
   //     </li>
   //   </ul>
   // </nav>
+
+  const Api_Key = 'KMGHDGTtYyp8ZQ6PslEt0FGSzsPPNayDVL8SfwGe9yZtqZFk5BMQ9U8763MgRzvc5QykfH9fxyf1ZovtRuDkyQ%3D%3D';
+const url = new URL(`http://apis.data.go.kr/1400000/service/cultureInfoService2/mntInfoOpenAPI`);
+
+const getLatestNews2 = async () => {
+    url.searchParams.append('ServiceKey', Api_Key);
+    url.searchParams.append('type', 'json');  // JSON 형식으로 데이터 요청
+
+    try {
+        const response = await fetch(url, {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Accept': 'application/json'  // 응답 데이터 타입을 명시적으로 JSON으로 지정
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.log('Error fetching the API:', error);
+    }
+};
+
+getLatestNews2();
