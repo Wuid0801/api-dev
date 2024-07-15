@@ -202,15 +202,8 @@ const url = new URL(`https://monumental-eclair-c31282.netlify.app/1400000/servic
 
 const getLatestNews2 = async () => {
     url.searchParams.append('ServiceKey', Api_Key);
-    url.searchParams.append('type', 'json');  // JSON 형식으로 데이터 요청
-
     try {
-        const response = await fetch(url, {
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Accept': 'application/json'  // 응답 데이터 타입을 명시적으로 JSON으로 지정
-            }
-        });
+        const response = await fetch(url);
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
