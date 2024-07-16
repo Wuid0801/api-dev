@@ -198,22 +198,31 @@ const moveToPage = (pageNum) => {
   // </nav>
 
   const Api_Key = 'KMGHDGTtYyp8ZQ6PslEt0FGSzsPPNayDVL8SfwGe9yZtqZFk5BMQ9U8763MgRzvc5QykfH9fxyf1ZovtRuDkyQ%3D%3D';
-const url = new URL(`https://monumental-eclair-c31282.netlify.app/1400000/service/cultureInfoService2/mntInfoOpenAPI`);
-
-const getLatestNews2 = async () => {
-    url.searchParams.append('ServiceKey', Api_Key);
-    try {
-        const response = await fetch(url);
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log(data);
-    } catch (error) {
-        console.log('Error fetching the API:', error);
-    }
-};
-
-getLatestNews2();
+  const apiUrl = 'https://monumental-eclair-c31282.netlify.app/1400000/service/cultureInfoService2/mntInfoOpenAPI';
+  
+  const getLatestNews2 = async () => {
+      const url = new URL(apiUrl);
+      url.searchParams.append('searchWrd', '북한산');
+      url.searchParams.append('ServiceKey', Api_Key);
+      url.searchParams.append('type', 'json');  // JSON 형식으로 데이터 요청
+  
+      try {
+          const response = await fetch(url, {
+              headers: {
+                  'X-Requested-With': 'XMLHttpRequest'
+              }
+          });
+  
+          if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+          }
+  
+          const data = await response.json();
+          console.log(data);
+      } catch (error) {
+          console.error('Error fetching the API:', error);
+      }
+  };
+  
+  getLatestNews2();
+  
